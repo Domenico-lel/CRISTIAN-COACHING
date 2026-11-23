@@ -69,7 +69,7 @@ function Film() {
       <div className="film-copy">
         <p className="film-kicker"><span/> Personal training individuale</p>
         <h1>Allenati con<br/><em>Cristian.</em></h1>
-        <p className="film-desc">La tua settimana, i tuoi obiettivi. Una scheda che costruiamo insieme.</p>
+        <p className="film-desc">Costruiamo la tua scheda partendo da come ti alleni, dagli attrezzi che hai e dal tempo che puoi dedicarci.</p>
         <Link className="film-action" href="/registrazione">Inizia il tuo percorso <span aria-hidden="true">↗</span></Link>
       </div>
       <a href="#prova-scheda" className="film-scroll"><span aria-hidden="true">↓</span> Scopri la scheda</a>
@@ -86,11 +86,15 @@ export default function FilmHome(){
   const session = plan.days[day]
   const current = sample.exercises.find(x => x.id === exercise)
   return <main className="film-home"><Film/>
+    <section className="studio-method" id="metodo">
+      <div><p className="film-kicker"><span/> Il metodo</p><h2>Un programma<br/><em>che ti segue.</em></h2><Link className="sheet-link" href="/chi-sono">Conosci Cristian ↗</Link></div>
+      <dl><dt>La prima conversazione</dt><dd>Parliamo della tua esperienza in palestra, delle tue preferenze e di quanti giorni hai a disposizione.</dd><dt>La tua settimana</dt><dd>Organizzo gli esercizi in giornate, con serie, recuperi e un video da consultare durante l’allenamento.</dd><dt>Il confronto</dt><dd>Al controllo successivo mi racconti cosa ha funzionato. Da lì aggiorniamo la scheda insieme.</dd></dl>
+    </section>
     <section className="film-sheet" id="prova-scheda">
       <div className="sheet-intro">
         <p className="film-kicker"><span/> La tua area personale</p>
         <h2>Dentro la<br/><em>scheda.</em></h2>
-        <p>Questa è la settimana di Marco. Scegli un giorno e tocca un esercizio per vedere come si allena.</p>
+        <p>Prova la settimana di Marco. Scegli una giornata, poi apri un esercizio per vedere il tutorial e le note di Cristian.</p>
         <Link className="sheet-link" href="/demo">Esplora l’area demo ↗</Link>
       </div>
       <div className="session-card">
@@ -103,6 +107,6 @@ export default function FilmHome(){
         </div>
       </div>
     </section>
-    <section className="film-consult"><div><p className="film-kicker"><span/> Prima consulenza</p><h2>Da dove<br/><em>partiamo?</em></h2></div><div><p>Raccontami come ti alleni, dove vuoi arrivare e quanto tempo hai. Scegliamo insieme il primo passo.</p><Link className="film-action" href="/registrazione">Prenota una consulenza ↗</Link></div></section>
+    <section className="film-consult" id="consulenza"><div><p className="film-kicker"><span/> Prima consulenza</p><h2>Da dove<br/><em>partiamo?</em></h2></div><div><p>Scegli una consulenza online o in presenza. Dopo la registrazione trovi in calendario i giorni e gli orari disponibili.</p><Link className="film-action" href="/registrazione">Richiedi una consulenza ↗</Link></div></section>
   </main>
 }

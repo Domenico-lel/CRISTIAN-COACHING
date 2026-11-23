@@ -20,3 +20,15 @@
 body:has(.film-home) header,body:has(.film-home) footer{position:relative;z-index:1}
 
 @media(prefers-reduced-motion:reduce){.film-home .film-stage{height:auto}}
+
+header.studio-bar,body:has(.film-home) header.studio-bar{position:sticky;top:0;z-index:20;background:#171b19;color:#fff9ed;border-bottom:1px solid #ffffff24}
+.studio-bar-inner{width:min(1190px,92%);min-height:66px;margin:auto;display:flex;align-items:center;gap:24px}
+.desktop-links{display:flex;align-items:center;gap:24px;margin:auto}.desktop-links a,#mobile-links a{padding:12px 0}
+.studio-access,.menu-toggle{font-size:14px;min-height:44px;display:inline-flex;align-items:center;padding:0 15px;border-radius:6px;font-weight:650}
+.studio-access{background:#ffd18c;color:#201b12}.menu-toggle{background:transparent;color:#fff9ed;border-color:#575b53;display:none}#mobile-links{display:none}
+.studio-bar .brand b{color:#ffd18c}.film-home section[id]{scroll-margin-top:82px}
+.studio-method{background:#eeeae0;padding:clamp(40px,6vw,88px) max(5vw,calc((100vw - 1100px)/2));display:grid;grid-template-columns:1fr 1fr;gap:8vw;align-items:center;margin-bottom:clamp(60px,15vh,160px)}
+.studio-method h2{font-size:clamp(44px,5.8vw,90px);line-height:.94;letter-spacing:-.065em;margin:18px 0 25px}.studio-method dl{margin:0}.studio-method dt{border-top:1px solid #a9afa3;padding-top:13px;font-size:21px;font-weight:680;letter-spacing:-.03em}.studio-method dd{margin:5px 0 20px;max-width:48ch;color:#424b43}
+.film-home .film-sheet{background:#f4f1e9;align-items:center}.session-card{box-shadow:0 12px 35px #25241c14;border-top:4px solid #bf945d}.session-days button:hover,.session-row:hover{background:#e8e4d8}.session-days button[aria-pressed=true]{background:#262b26}
+.film-home .film-consult{border-left:4px solid var(--ember);background:#172219f5}.film-consult h2{font-size:clamp(48px,6.4vw,92px)}
+@media(max-width:720px){.desktop-links{display:none}.studio-bar-inner{min-height:60px;gap:8px}.studio-access{margin-left:auto}.menu-toggle{display:inline-flex}#mobile-links:not([hidden]){display:grid;padding:4px 4% 12px;border-top:1px solid #424740;position:absolute;top:100%;left:0;right:0;background:#171b19;box-shadow:0 12px 24px #0003}#mobile-links a{border-bottom:1px solid #383e38}.studio-method{display:block}.studio-method dl{margin-top:28px}.film-home .film-sheet{gap:18px}.studio-bar .brand{gap:7px}}
