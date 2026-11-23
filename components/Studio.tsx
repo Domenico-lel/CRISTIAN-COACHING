@@ -1,6 +1,7 @@
 'use client'
 import {useState,useEffect,type ReactNode} from 'react'
 import Link from 'next/link'
+import FilmHome from './FilmHome'
 import {change} from '../lib/store'
 import {type Data,seed,uid,weekdays} from '../lib/data'
 import {rome} from '../lib/calendar'
@@ -15,7 +16,7 @@ function Action({href,children}:{href:string,children:ReactNode}){return <Link c
 function Method(){return <div className="method">{method.map(([a,b],i)=><article key={a}><small>0{i+1}</small><h3>{a}</h3><p>{b}</p></article>)}</div>}
 function Public({route}:{route:string}){if(route==='chi-sono')return <main className="wrap intro"><small>IL COACH</small><h1>Ciao, sono<br/><em>Cristian.</em></h1><div className="split"><div><p className="lead">Studio ingegneria biomedica e la palestra è una parte importante delle mie giornate.</p><p>Nel coaching individuale partiamo dal tuo tempo, dalla tua esperienza e dagli esercizi che preferisci. Ci confrontiamo per costruire una scheda che puoi seguire davvero.</p><Action href="/registrazione">Inizia il tuo percorso</Action></div><div className="portrait">CC <small>Ritratto di Cristian · prossimamente</small></div></div></main>
 if(route==='come-funziona')return <main className="wrap intro"><small>IL METODO</small><h1>Come<br/><em>funziona.</em></h1><Method/><Action href="/registrazione">Inizia il tuo percorso</Action></main>
-return <><section className="hero"><div className="hero-inner"><div className="copy"><small><i/> STUDIO DI PERSONAL TRAINING</small><h1>Il tuo ritmo.<br/>La tua <em>forza.</em></h1><p>Allenamento individuale con Cristian. Una scheda costruita insieme, a partire dai tuoi obiettivi e dal tempo che hai.</p><Action href="/registrazione">Inizia il tuo percorso</Action> <Link className="lightlink" href="/demo">Esplora la demo ↗</Link></div><div className="art" role="img" aria-label="Disco da palestra in grafite, illustrazione dello studio"><div className="plate"><b>CRISTIAN COACHING</b><i/><strong>20 <small>KG</small></strong></div><div className="mark">CC ／ STUDIO</div></div></div></section><main className="wrap intro"><small>IL METODO</small><h2 className="headline">Un percorso costruito su di te.</h2><Method/><Link className="btn" href="/chi-sono">Conosci Cristian ↗</Link></main></>}
+return <FilmHome/>}
 export default function Studio({route}:{route:string}){const [d,set]=useState<Data>(),[session,sessionSet]=useState(''),[msg,say]=useState(''),[profile,show]=useState('')
 useEffect(()=>{let alive=true;function sync(){change(()=>{}).then(s=>{if(alive){set(s);sessionSet(localStorage.getItem('cc-session')||'')}}).catch(()=>{if(alive)say('Archiviazione non disponibile. Abilita IndexedDB per usare la demo.')})}sync();window.addEventListener('focus',sync);if('serviceWorker' in navigator)navigator.serviceWorker.register('/sw.js').catch(()=>{});return ()=>{alive=false;window.removeEventListener('focus',sync)}},[])
 const save:Save=async fn=>{try{set(await change(fn));say('Modifiche salvate su questo dispositivo.');return true}catch(e){say(e instanceof Error?(e.name==='QuotaExceededError'?'Spazio insufficiente per questo video.':e.message):'Salvataggio non riuscito.');return false}}
