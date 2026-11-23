@@ -8,3 +8,15 @@
 .film-copy h1{font-size:clamp(53px,14vw,90px)}.film-desc{max-width:320px;margin:15px 0}.film-sheet,.film-consult{grid-template-columns:1fr;gap:28px}.sheet-intro{position:static}.film-scroll{bottom:3%}.film-consult br{display:none}.film-consult h2 em:before{content:' '}.film-consult{gap:10px}}
 @media(prefers-reduced-motion:reduce){.film-stage{height:auto;padding-bottom:0}.film-screen,.sheet-intro{position:relative;top:auto}.film-copy{transform:none}.session-body{animation:none}}
 .film-more{display:flex;gap:24px;flex-wrap:wrap;padding:22px max(5vw,calc((100vw - 1190px)/2));font-weight:650;border-bottom:1px solid #d7d3c9}
+/* The walkthrough stays visible behind each section, through the footer. */
+.film-home{isolation:isolate;background:transparent}
+.film-home .film-screen{isolation:auto;overflow:visible;background:transparent}
+.film-home .walk-backdrop{position:fixed;inset:0;z-index:-1;isolation:isolate;pointer-events:none;background:#202420}
+.film-home .film-stage{height:115svh;background:transparent}
+.film-home .film-sheet,.film-home .film-consult{width:min(1120px,92%);margin:0 auto clamp(72px,22vh,220px);border-radius:16px;padding:clamp(20px,5vw,76px);position:relative}
+.film-home .film-sheet{background:#f5f2eaed}
+.film-home .film-consult{background:#172219ed}
+.film-home .film-more{background:#eeece5}
+body:has(.film-home) header,body:has(.film-home) footer{position:relative;z-index:1}
+body:has(.film-home) footer{background:#eeece5}
+@media(prefers-reduced-motion:reduce){.film-home .film-stage{height:auto}}

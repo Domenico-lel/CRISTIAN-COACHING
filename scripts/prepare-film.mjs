@@ -10,9 +10,9 @@ const dir='public/media'
 await mkdir(dir,{recursive:true})
 
 const exists=path=>access(path).then(()=>true,()=>false)
-for (const {format, source, poster} of shots) {
-  const clip = join(dir, 'sala-' + format + '.mp4')
-  const still = join(dir, 'sala-' + format + '.jpg')
+for (const {format, source} of shots) {
+  const clip = join(dir, 'pesi-' + format + '.mp4')
+  const still = join(dir, 'pesi-' + format + '.jpg')
   if (await exists(clip) && await exists(still)) continue
   const temporary=await mkdtemp(join(tmpdir(),'cc-film-'))
   try{
@@ -22,11 +22,7 @@ for (const {format, source, poster} of shots) {
     await writeFile(input,new Uint8Array(await response.arrayBuffer()))
     const encode=(args)=>execFileSync(ffmpeg.path,['-hide_banner','-loglevel','error','-y','-i',input,...args],{stdio:'inherit'})
     encode(['-an','-vf','hqdn3d=1:0.75:2:1.5','-c:v','libx264','-preset','fast','-crf','16','-g','4','-keyint_min','4','-sc_threshold','0','-pix_fmt','yuv420p','-movflags','+faststart',clip+'.tmp.mp4'])
-    const photo = await fetch(poster,{signal:AbortSignal.timeout(60000)})
-    if(!photo.ok) throw Error('Download foto: '+photo.status)
-    const image = join(temporary,'foto')
-    await writeFile(image,new Uint8Array(await photo.arrayBuffer()))
-    execFileSync(ffmpeg.path,['-hide_banner','-loglevel','error','-y','-i',image,'-frames:v','1','-q:v','2',still+'.tmp.jpg'],{stdio:'inherit'})
+    encode(['-frames:v','1','-q:v','2',still+'.tmp.jpg'])
     await rename(clip+'.tmp.mp4',clip)
     await rename(still+'.tmp.jpg',still)
   }finally{await rm(temporary,{recursive:true,force:true})}

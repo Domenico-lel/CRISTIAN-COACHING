@@ -18,8 +18,8 @@ function Film() {
     function selectShot() {
       if (!clip) return
       const format = portrait.matches ? 'verticale' : 'orizzontale'
-      clip.poster = '/media/sala-' + format + '.jpg'
-      clip.src = '/media/sala-' + format + '.mp4'
+      clip.poster = '/media/pesi-' + format + '.jpg'
+      clip.src = '/media/pesi-' + format + '.mp4'
       clip.load()
     }
     let frame = 0
@@ -32,9 +32,8 @@ function Film() {
     function paint() {
       frame = 0
       if (!section) return
-      const box = section.getBoundingClientRect()
-      const height = section.firstElementChild?.clientHeight || window.innerHeight
-      target = preference.matches ? 0 : Math.min(1, Math.max(0, -box.top / Math.max(1, box.height - height)))
+      const distance = document.documentElement.scrollHeight - window.innerHeight
+      target = preference.matches ? 0 : Math.min(1, Math.max(0, window.scrollY / Math.max(1, distance)))
       section.style.setProperty('--travel', String(target))
       seek()
     }
@@ -46,8 +45,11 @@ function Film() {
     window.addEventListener('resize', schedule)
     portrait.addEventListener('change', selectShot)
     selectShot()
+    const observer = new ResizeObserver(schedule)
+    observer.observe(document.body)
     paint()
     return () => {
+      observer.disconnect()
       portrait.removeEventListener('change', selectShot)
       cancelAnimationFrame(frame)
       clip.removeEventListener('loadedmetadata', schedule)
@@ -57,14 +59,13 @@ function Film() {
       window.removeEventListener('resize', schedule)
     }
   }, [])
-  return <section ref={stage} className="film-stage">
-    <div className="film-screen">
-      <picture className="film-still" aria-hidden="true">
-        <source media="(orientation: portrait)" srcSet="/media/sala-verticale.jpg"/>
-        <img src="/media/sala-orizzontale.jpg" alt="" fetchPriority="high"/>
+  return <><div className="walk-backdrop"><picture className="film-still" aria-hidden="true">
+        <source media="(orientation: portrait)" srcSet="/media/pesi-verticale.jpg"/>
+        <img src="/media/pesi-orizzontale.jpg" alt="" fetchPriority="high"/>
       </picture>
       <video ref={video} className="film-source" muted playsInline preload="auto" aria-hidden="true"/>
-      <div className="film-shade"/>
+      <div className="film-shade"/></div>
+    <section ref={stage} className="film-stage"><div className="film-screen">
       <div className="film-copy">
         <p className="film-kicker"><span/> Personal training individuale</p>
         <h1>Allenati con<br/><em>Cristian.</em></h1>
@@ -74,7 +75,7 @@ function Film() {
       <a href="#prova-scheda" className="film-scroll"><span aria-hidden="true">↓</span> Scopri la scheda</a>
       <div className="film-meter" aria-hidden="true"/>
     </div>
-  </section>
+  </section></>
 }
 
 export default function FilmHome(){
