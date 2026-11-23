@@ -14,6 +14,14 @@ function Film() {
     const clip = video.current
     if (!section || !clip) return
     const preference = matchMedia('(prefers-reduced-motion: reduce)')
+    const portrait = matchMedia('(orientation: portrait)')
+    function selectShot() {
+      if (!clip) return
+      const format = portrait.matches ? 'verticale' : 'orizzontale'
+      clip.poster = '/media/sala-' + format + '.jpg'
+      clip.src = '/media/sala-' + format + '.mp4'
+      clip.load()
+    }
     let frame = 0
     let target = 0
     function seek() {
@@ -36,8 +44,11 @@ function Film() {
     preference.addEventListener('change', schedule)
     window.addEventListener('scroll', schedule, {passive:true})
     window.addEventListener('resize', schedule)
+    portrait.addEventListener('change', selectShot)
+    selectShot()
     paint()
     return () => {
+      portrait.removeEventListener('change', selectShot)
       cancelAnimationFrame(frame)
       clip.removeEventListener('loadedmetadata', schedule)
       clip.removeEventListener('seeked', seek)
@@ -48,7 +59,11 @@ function Film() {
   }, [])
   return <section ref={stage} className="film-stage">
     <div className="film-screen">
-      <video ref={video} className="film-source" src="/media/orbita-hq.mp4" poster="/media/orbita-hq.jpg" muted playsInline preload="auto" aria-hidden="true"/>
+      <picture className="film-still" aria-hidden="true">
+        <source media="(orientation: portrait)" srcSet="/media/sala-verticale.jpg"/>
+        <img src="/media/sala-orizzontale.jpg" alt="" fetchPriority="high"/>
+      </picture>
+      <video ref={video} className="film-source" muted playsInline preload="auto" aria-hidden="true"/>
       <div className="film-shade"/>
       <div className="film-copy">
         <p className="film-kicker"><span/> Personal training individuale</p>
