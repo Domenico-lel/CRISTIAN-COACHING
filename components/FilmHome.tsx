@@ -48,7 +48,7 @@ function Film() {
   }, [])
   return <section ref={stage} className="film-stage">
     <div className="film-screen">
-      <video ref={video} className="film-source" src="/media/orbita.mp4" poster="/media/orbita.jpg" muted playsInline preload="auto" aria-hidden="true"/>
+      <video ref={video} className="film-source" src="/media/orbita-hq.mp4" poster="/media/orbita-hq.jpg" muted playsInline preload="auto" aria-hidden="true"/>
       <div className="film-shade"/>
       <div className="film-copy">
         <p className="film-kicker"><span/> Personal training individuale</p>
