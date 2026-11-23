@@ -104,6 +104,5 @@ export default function FilmHome(){
       </div>
     </section>
     <section className="film-consult"><div><p className="film-kicker"><span/> Prima consulenza</p><h2>Da dove<br/><em>partiamo?</em></h2></div><div><p>Raccontami come ti alleni, dove vuoi arrivare e quanto tempo hai. Scegliamo insieme il primo passo.</p><Link className="film-action" href="/registrazione">Prenota una consulenza ↗</Link></div></section>
-    <nav className="film-more" aria-label="Approfondisci il coaching"><Link href="/chi-sono">Conosci Cristian ↗</Link><Link href="/come-funziona">Come funziona ↗</Link></nav>
   </main>
 }
