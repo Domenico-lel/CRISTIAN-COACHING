@@ -1,0 +1,4 @@
+import {seed,type Data} from './data'
+let connection:Promise<IDBDatabase>|undefined
+function open(){return connection??=new Promise((ok,fail)=>{const req=indexedDB.open('cristian-studio',1);req.onupgradeneeded=()=>req.result.createObjectStore('demo');req.onsuccess=()=>ok(req.result);req.onerror=()=>fail(req.error)})}
+export async function change(edit:(data:Data)=>void):Promise<Data>{const db=await open();return new Promise((ok,fail)=>{const tx=db.transaction('demo','readwrite'),store=tx.objectStore('demo'),r=store.get('v1');let next:Data;let reason:unknown;r.onsuccess=()=>{try{next=r.result||seed();edit(next);store.put(next,'v1')}catch(e){reason=e;tx.abort()}};tx.oncomplete=()=>ok(next);tx.onabort=()=>fail(reason||tx.error||Error('Salvataggio interrotto'));tx.onerror=()=>fail(tx.error)})}
