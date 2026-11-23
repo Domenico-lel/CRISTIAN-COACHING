@@ -11,7 +11,7 @@ import {Catalog} from './Catalog'
 const method=[['Registrati','Entra nello studio con un profilo dimostrativo.'],['Prenota una consulenza','Scegli una data e incontra Cristian online o in presenza.'],['Definisci gli obiettivi','Racconta cosa ti piace, quanto tempo hai e dove ti alleni.'],['Ricevi la tua scheda','Cristian organizza esercizi, giornate e recuperi per te.'],['Allenati con i tutorial','Rivedi i movimenti direttamente dalla tua scheda.'],['Aggiorna il percorso','Ritrova Cristian per un controllo e concorda le modifiche.']]
 const clientNav=[['','Home'],['schede','Schede'],['appuntamenti','Appuntamenti'],['video','Video'],['profilo','Profilo']]
 const coachNav=[['','Panoramica'],['clienti','Clienti'],['registrazioni','Registrazioni'],['calendario','Calendario'],['schede','Schede'],['esercizi','Esercizi'],['video','Video'],['impostazioni','Impostazioni']]
-function Brand(){return <Link href="/" className="brand"><b>CC</b><span>CRISTIAN<br/>COACHING</span></Link>}
+function Brand(){return <Link href="/" className="brand"><img src="/brand/c-180.png" alt="" width="42" height="42"/><span>CRISTIAN<br/>COACHING</span></Link>}
 const siteLinks = [['/chi-sono','Cristian'],['/#metodo','Metodo'],['/#prova-scheda','Scheda'],['/#consulenza','Consulenza']]
 function SiteHeader(){
   const [open,setOpen]=useState(false)
@@ -25,7 +25,7 @@ function SiteHeader(){
 }
 function Action({href,children}:{href:string,children:ReactNode}){return <Link className="btn primary" href={href}>{children} <span>↗</span></Link>}
 function Method(){return <div className="method">{method.map(([a,b],i)=><article key={a}><small>0{i+1}</small><h3>{a}</h3><p>{b}</p></article>)}</div>}
-function Public({route}:{route:string}){if(route==='chi-sono')return <main className="wrap intro"><small>IL COACH</small><h1>Ciao, sono<br/><em>Cristian.</em></h1><div className="split"><div><p className="lead">Studio ingegneria biomedica e la palestra è una parte importante delle mie giornate.</p><p>Nel coaching individuale partiamo dal tuo tempo, dalla tua esperienza e dagli esercizi che preferisci. Ci confrontiamo per costruire una scheda che puoi seguire davvero.</p><Action href="/registrazione">Inizia il tuo percorso</Action></div><div className="portrait">CC <small>Ritratto di Cristian · prossimamente</small></div></div></main>
+function Public({route}:{route:string}){if(route==='chi-sono')return <main className="wrap intro"><small>IL COACH</small><h1>Ciao, sono<br/><em>Cristian.</em></h1><div className="split"><div><p className="lead">Studio ingegneria biomedica e la palestra è una parte importante delle mie giornate.</p><p>Nel coaching individuale partiamo dal tuo tempo, dalla tua esperienza e dagli esercizi che preferisci. Ci confrontiamo per costruire una scheda che puoi seguire davvero.</p><Action href="/registrazione">Inizia il tuo percorso</Action></div><div className="portrait"><img src="/brand/c-512.png" width="210" height="210" alt="Cristian Coaching"/></div></div></main>
 if(route==='come-funziona')return <main className="wrap intro"><small>IL METODO</small><h1>Come<br/><em>funziona.</em></h1><Method/><Action href="/registrazione">Inizia il tuo percorso</Action></main>
 return <FilmHome/>}
 export default function Studio({route}:{route:string}){const [d,set]=useState<Data>(),[session,sessionSet]=useState(''),[msg,say]=useState(''),[profile,show]=useState('')
